@@ -3,125 +3,86 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Oficinas Municipalidad de Mendoza</title>
+  <title>Oficinas Municipalidad - Sin Conflictos</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #f3f3f3;
-      margin: 0;
-      padding: 0;
+      font-family: sans-serif;
+      background: #f4f4f4;
       text-align: center;
+      padding: 20px;
     }
     header {
-      background: linear-gradient(90deg, #d32f2f, #b71c1c);
+      background: #b71c1c;
       color: white;
-      padding: 20px;
-      font-size: 2rem;
-    }
-    .floor-buttons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin: 20px;
+      padding: 15px;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
     }
     .floor-buttons button {
-      background-color: #388e3c;
+      background: #2e7d32;
       color: white;
+      padding: 10px 20px;
+      margin: 5px;
       border: none;
-      margin: 10px;
-      padding: 15px 25px;
-      border-radius: 8px;
+      border-radius: 6px;
       font-size: 1rem;
       cursor: pointer;
+    }
+    .floor-buttons button:hover {
+      background: #1b5e20;
     }
     .floor-info {
       display: none;
       background: white;
       margin: 20px auto;
-      padding: 15px;
+      padding: 20px;
       max-width: 700px;
       border-radius: 10px;
-      border: 1px solid #ccc;
       text-align: left;
-    }
-    #search-input {
-      padding: 10px;
-      font-size: 1rem;
-      width: 300px;
-      margin-top: 15px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
   <header>Oficinas Municipalidad de la Ciudad de Mendoza</header>
 
-  <input id="search-input" placeholder="Buscar..." onkeyup="buscar()" />
-  <div id="result"></div>
-
   <div class="floor-buttons">
-    <button onclick="mostrar('2 Piso Subsuelo')">2° Subsuelo</button>
-<button onclick="mostrar('1 Piso Subsuelo')">1° Subsuelo</button>
-<button onclick="mostrar('entrepiso')">Entrepiso</button>
-<button onclick="mostrar('piso1')">1° Piso</button>
-<button onclick="mostrar('piso2')">2° Piso</button>
-<button onclick="mostrar('piso3')">3° Piso</button>
-<button onclick="mostrar('piso4')">4° Piso</button>
-<button onclick="mostrar('piso5')">5° Piso</button>
-<button onclick="mostrar('piso6')">6° Piso</button>
-<button onclick="mostrar('piso7')">7° Piso</button>
+    <button onclick="mostrar('piso_1')">1° Piso</button>
+<button onclick="mostrar('piso_2')">2° Piso</button>
+<button onclick="mostrar('piso_3')">3° Piso</button>
+<button onclick="mostrar('piso_4')">4° Piso</button>
+<button onclick="mostrar('piso_5')">5° Piso</button>
+<button onclick="mostrar('piso_6')">6° Piso</button>
+<button onclick="mostrar('piso_7')">7° Piso</button>
   </div>
 
   <div id="floor-data"></div>
 
   <script>
     let datos = null;
-    let cargado = false;
 
-    function normalizar(texto) {
-      return texto.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-    }
-
-    function buscar() {
-      if (!cargado || !datos) return;
-      const input = document.getElementById('search-input').value;
-      const result = document.getElementById('result');
-      let encontrado = '';
-      for (const piso in datos) {
-        datos[piso].forEach(e => {
-          if (normalizar(e).includes(normalizar(input))) {
-            encontrado += `<div><strong>${e}</strong> ➝ <u>${piso}</u></div>`;
-          }
-        });
-      }
-      result.innerHTML = encontrado || 'No encontrado';
-    }
-
-    function mostrar(id) {
-      if (!cargado || !datos) return;
-      document.querySelectorAll('.floor-info').forEach(div => {
-        div.style.display = 'none';
-      });
-      const el = document.getElementById(id);
+    function mostrar(piso) {
+      document.querySelectorAll('.floor-info').forEach(div => div.style.display = 'none');
+      const el = document.getElementById(piso);
       if (el) el.style.display = 'block';
     }
 
     function mostrarTodo() {
-      const container = document.getElementById('floor-data');
+      const contenedor = document.getElementById('floor-data');
       for (const piso in datos) {
         const div = document.createElement('div');
         div.className = 'floor-info';
         div.id = piso;
-        div.innerHTML = `<h3>${piso}</h3><ul>${datos[piso].map(e => `<li>${e}</li>`).join('')}</ul>`;
-        container.appendChild(div);
+        div.innerHTML = `<h2>${piso}</h2><ul>${datos[piso].map(e => `<li>${e}</li>`).join('')}</ul>`;
+        contenedor.appendChild(div);
       }
     }
 
-    fetch('datos.json')
-      .then(res => res.json())
+    fetch("datos.json")
+      .then(resp => resp.json())
       .then(data => {
         datos = data;
         mostrarTodo();
-        cargado = true;
       });
   </script>
 </body>

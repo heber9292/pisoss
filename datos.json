@@ -1,5 +1,5 @@
 {
-  "2 Subsuelo": [
+  "2 Piso Subsuelo": [
     "Guardia: 5107",
     "Mayordomía: 5108",
     "Mantenimiento: 5109 / 5110",
@@ -7,7 +7,7 @@
     "Cochera: 5112",
     "Género y Diversidad: 5302"
   ],
-  "1 Subsuelo": [
+  "1 Piso Subsuelo": [
     "Mesa de Entradas: 5134 / 5136 (Miriam)",
     "Catastro: 5123 / 5126 (Sandra 5128) ➝ 5426 (trasladado al 7° piso)",
     "Registro Civil: 5267",
@@ -21,7 +21,7 @@
     "Cochera: 5112",
     "Licencia de Conducir: 5121"
   ],
-  "Entrepiso": [
+  "entrepiso": [
     "Obras Privadas: 5147, 5140",
     "Instalaciones Complementarias: 5147 (5148 Gloria)",
     "Construcciones: 5140, 5137",
@@ -32,7 +32,7 @@
     "Control de Gestión: 5286 / 5423",
     "Call Center: 5344 (Axel 5124, Romi 5452)"
   ],
-  "1 Piso": [
+  "piso1": [
     "Junta Médica: 4495240 (Natalia Lima)",
     "Liquidaciones: 4495217 (Erica Caduto)",
     "Personal: 4495218 (Cristina Zeballos)",
@@ -47,7 +47,7 @@
     "Sistemas: Gaby 5444, Guille Sayges 5264, Claves Pablo Juárez 5264, SIGEMI 5157",
     "Clave de sistemas: 5430"
   ],
-  "2 Piso": [
+  "piso2": [
     "Charly: 5280 (2615418637)",
     "Intendencia: Frodo 5388, Ceci 5271 / Cocina 5224",
     "Gabinete: 5443",
@@ -61,7 +61,7 @@
     "Digesto: 5129 / 5495",
     "Contrataciones y Registros: 5253"
   ],
-  "3 Piso": [
+  "piso3": [
     "Dirección de Salud: 4495205 – 4495202 (Patricia Aldunate) (salud animal: 5264)",
     "Programa Sumar: 4495318 (Laura Villanueva y Florencia Guzmán)",
     "Subsecretaría de Inclusión y Desarrollo Humano: Ana Urrutia, secretaria 5195",
@@ -74,7 +74,7 @@
     "Dirección de Deportes: 5204 – 5337 (Antonio Velasco) (Steffi: 5337)",
     "Ordenamiento Territorial: Javier 5210"
   ],
-  "4 Piso": [
+  "piso4": [
     "Nico Beininga: 5526",
     "Rev. técnica: 4495381 (Juan Aquaviva)",
     "Secretaría de Gobierno: 5462, 5213, 5215 (Graciela)",
@@ -98,8 +98,8 @@
     "Vía Pública: 4495520 – 4495294 (Martín Núñez)",
     "Jorge: 5321"
   ],
-  "5 Piso": [
-       "Gestión Ambiental: 4495252 – 4495250",
+  "piso5": [
+    "Gestión Ambiental: 4495252 – 4495250",
     "Dirección Vivienda: 4495284 – 4495292 – 449(5263 José) (Mariana Osorio)",
     "Paseos: 5399USIM – TEL: 2614188084 (Laurdes Araomera)",
     "Arbolado UCIM: 2614685759",
@@ -112,7 +112,7 @@
     "Secretaría de Infraestructura: Eva 5234 / Agustina 5235 ➝ 5231",
     "Dirección de Obras Públicas: 5230, 5235, 5231, 5237 (Martín Careddú), 5238"
   ],
-  "6 Piso": [
+  "piso6": [
     "YOSEYN: 5254",
     "Dirección de Rentas: Roberto 5417 / Fede 5494 (José: 5402)",
     "Recaudación: 5122 / 4495505 – 4495370 (Jimena Verdi)",
@@ -124,7 +124,7 @@
     "Publicidad y Propaganda adicional: 5342",
     "Número anotado: 5497"
   ],
-  "7 Piso": [
+  "piso7": [
     "Desarrollo Económico: 4495512 (Estela) – 4495457 (Oficina de empleo)",
     "Archivo General y Notificaciones: 4495509",
     "Secretaría de Turismo y Cultura: Mesa de Entradas: 5391",

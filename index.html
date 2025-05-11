@@ -7,9 +7,9 @@
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f3f3;
       margin: 0;
       padding: 0;
-      background-color: #f3f3f3;
       text-align: center;
     }
     header {
@@ -44,39 +44,31 @@
       border: 1px solid #ccc;
       text-align: left;
     }
-    #search-container {
-      margin-top: 20px;
-    }
     #search-input {
       padding: 10px;
       font-size: 1rem;
       width: 300px;
-    }
-    #result {
-      font-weight: bold;
-      margin-top: 10px;
+      margin-top: 15px;
     }
   </style>
 </head>
 <body>
   <header>Oficinas Municipalidad de la Ciudad de Mendoza</header>
 
-  <div id="search-container">
-    <input id="search-input" type="text" placeholder="Buscar por persona u oficina" onkeyup="buscar()" />
-    <div id="result"></div>
-  </div>
+  <input id="search-input" placeholder="Buscar..." onkeyup="buscar()" />
+  <div id="result"></div>
 
   <div class="floor-buttons">
-    <button onclick="mostrar('2 Subsuelo')">2 Subsuelo</button>
-<button onclick="mostrar('1 Subsuelo')">1 Subsuelo</button>
-<button onclick="mostrar('Entrepiso')">Entrepiso</button>
-<button onclick="mostrar('1 Piso')">1 Piso</button>
-<button onclick="mostrar('2 Piso')">2 Piso</button>
-<button onclick="mostrar('3 Piso')">3 Piso</button>
-<button onclick="mostrar('4 Piso')">4 Piso</button>
-<button onclick="mostrar('5 Piso')">5 Piso</button>
-<button onclick="mostrar('6 Piso')">6 Piso</button>
-<button onclick="mostrar('7 Piso')">7 Piso</button>
+    <button onclick="mostrar('2 Piso Subsuelo')">2° Subsuelo</button>
+<button onclick="mostrar('1 Piso Subsuelo')">1° Subsuelo</button>
+<button onclick="mostrar('entrepiso')">Entrepiso</button>
+<button onclick="mostrar('piso1')">1° Piso</button>
+<button onclick="mostrar('piso2')">2° Piso</button>
+<button onclick="mostrar('piso3')">3° Piso</button>
+<button onclick="mostrar('piso4')">4° Piso</button>
+<button onclick="mostrar('piso5')">5° Piso</button>
+<button onclick="mostrar('piso6')">6° Piso</button>
+<button onclick="mostrar('piso7')">7° Piso</button>
   </div>
 
   <div id="floor-data"></div>
@@ -106,7 +98,9 @@
 
     function mostrar(id) {
       if (!cargado || !datos) return;
-      document.querySelectorAll('.floor-info').forEach(div => div.style.display = 'none');
+      document.querySelectorAll('.floor-info').forEach(div => {
+        div.style.display = 'none';
+      });
       const el = document.getElementById(id);
       if (el) el.style.display = 'block';
     }

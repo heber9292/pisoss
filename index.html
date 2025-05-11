@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oficinas Municipalidad - Sin Conflictos</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #f4f4f4;
+      text-align: center;
+      padding: 20px;
+    }
+    header {
+      background: #b71c1c;
+      color: white;
+      padding: 15px;
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+    }
+    .floor-buttons button {
+      background: #2e7d32;
+      color: white;
+      padding: 10px 20px;
+      margin: 5px;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    .floor-buttons button:hover {
+      background: #1b5e20;
+    }
+    .floor-info {
+      display: none;
+      background: white;
+      margin: 20px auto;
+      padding: 20px;
+      max-width: 700px;
+      border-radius: 10px;
+      text-align: left;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>Oficinas Municipalidad de la Ciudad de Mendoza</header>
+
+  <div class="floor-buttons">
+    <button onclick="mostrar('piso_1')">1° Piso</button>
+<button onclick="mostrar('piso_2')">2° Piso</button>
+<button onclick="mostrar('piso_3')">3° Piso</button>
+<button onclick="mostrar('piso_4')">4° Piso</button>
+<button onclick="mostrar('piso_5')">5° Piso</button>
+<button onclick="mostrar('piso_6')">6° Piso</button>
+<button onclick="mostrar('piso_7')">7° Piso</button>
+  </div>
+
+  <div id="floor-data"></div>
+
+  <script>
+    let datos = null;
+
+    function mostrar(piso) {
+      document.querySelectorAll('.floor-info').forEach(div => div.style.display = 'none');
+      const el = document.getElementById(piso);
+      if (el) el.style.display = 'block';
+    }
+
+    function mostrarTodo() {
+      const contenedor = document.getElementById('floor-data');
+      for (const piso in datos) {
+        const div = document.createElement('div');
+        div.className = 'floor-info';
+        div.id = piso;
+        div.innerHTML = `<h2>${piso}</h2><ul>${datos[piso].map(e => `<li>${e}</li>`).join('')}</ul>`;
+        contenedor.appendChild(div);
+      }
+    }
+
+    fetch("datos.json")
+      .then(resp => resp.json())
+      .then(data => {
+        datos = data;
+        mostrarTodo();
+      });
+  </script>
+</body>
+</html>

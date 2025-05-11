@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Directorio Municipal de Mendoza</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+    }
+    header {
+      background-color: #c62828;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .search-container {
+      text-align: center;
+      padding: 20px;
+    }
+    .search-container input {
+      width: 300px;
+      padding: 10px;
+    }
+    .floor-section {
+      padding: 20px;
+    }
+    .floor-section h2 {
+      border-bottom: 2px solid #c62828;
+      padding-bottom: 5px;
+    }
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+    li {
+      background: #fff;
+      margin: 5px 0;
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Directorio Municipal de Mendoza</h1>
+    <p>Información actualizada de oficinas y contactos</p>
+  </header>
+  <div class="search-container">
+    <input type="text" id="buscador" placeholder="Buscar por oficina, persona o teléfono..." onkeyup="filtrar()">
+  </div>
+  <div id="contenedor"></div>
+  <script>
+    let datos = {};
+    function filtrar() {
+      const input = document.getElementById("buscador").value.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+      const contenedor = document.getElementById("contenedor");
+      contenedor.innerHTML = "";
+      for (const piso in datos) {
+        const filtrados = datos[piso].filter(e => e.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").includes(input));
+        if (filtrados.length > 0 || input === "") {
+          const seccion = document.createElement("div");
+          seccion.className = "floor-section";
+          seccion.innerHTML = `<h2>${piso}</h2><ul>${filtrados.map(e => `<li>${e}</li>`).join("")}</ul>`;
+          contenedor.appendChild(seccion);
+        }
+      }
+    }
+
+    fetch("datos.json")
+      .then(r => r.json())
+      .then(d => {
+        datos = d;
+        filtrar();
+      })
+      .catch(err => {
+        document.getElementById("contenedor").innerHTML = "<p>Error al cargar los datos.</p>";
+      });
+  </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oficinas Municipalidad de Mendoza</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f3f3;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    header {
+      background: linear-gradient(90deg, #d32f2f, #b71c1c);
+      color: white;
+      padding: 30px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+    #search-container {
+      padding: 20px;
+    }
+    #search-input {
+      width: 90%;
+      max-width: 500px;
+      padding: 12px;
+      font-size: 1rem;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+    }
+    .floor-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px 10px;
+    }
+    .floor-buttons button {
+      background-color: #388e3c;
+      color: white;
+      border: none;
+      margin: 10px;
+      padding: 20px 25px;
+      border-radius: 10px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      min-width: 200px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+    .floor-buttons button:hover {
+      transform: scale(1.05);
+      background-color: #2e7d32;
+    }
+    .floor-info {
+      display: none;
+      margin: 10px auto;
+      padding: 20px;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      max-width: 800px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <header>Oficinas Municipalidad de la Ciudad de Mendoza. Actualizada.</header>
+
+  <div id="search-container">
+    <input type="text" id="search-input" placeholder="Buscar por oficina o persona..." onkeyup="buscar()" />
+    <div id="result"></div>
+  </div>
+
+  <div class="floor-buttons" id="botones-pisos"></div>
+  <div id="floor-data"></div>
+
+  <script>
+    let datos = {};
+    let cargado = false;
+
+    function normalizar(texto) {
+      return texto.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+    }
+
+    function buscar() {
+      if (!cargado) return;
+      const input = document.getElementById('search-input').value;
+      const result = document.getElementById('result');
+      let encontrado = '';
+      for (const piso in datos) {
+        datos[piso].forEach(e => {
+          if (normalizar(e).includes(normalizar(input))) {
+            encontrado += `<div><strong>${e}</strong> ➝ <u>${piso}</u></div>`;
+          }
+        });
+      }
+      result.innerHTML = encontrado || 'No encontrado';
+    }
+
+    function mostrar(piso) {
+      document.querySelectorAll('.floor-info').forEach(div => div.style.display = 'none');
+      const el = document.getElementById(piso);
+      if (el) el.style.display = 'block';
+    }
+
+    function mostrarTodo() {
+      const container = document.getElementById('floor-data');
+      const botones = document.getElementById('botones-pisos');
+      for (const piso in datos) {
+        const boton = document.createElement('button');
+        boton.textContent = piso;
+        boton.onclick = () => mostrar(piso);
+        botones.appendChild(boton);
+
+        const div = document.createElement('div');
+        div.className = 'floor-info';
+        div.id = piso;
+        div.innerHTML = `<h3>${piso}</h3><ul>${datos[piso].map(e => `<li>${e}</li>`).join('')}</ul>`;
+        container.appendChild(div);
+      }
+    }
+
+    fetch("datos.json")
+      .then(resp => resp.json())
+      .then(data => {
+        datos = data;
+        mostrarTodo();
+        cargado = true;
+      })
+      .catch(err => {
+        document.getElementById('result').innerText = "Error cargando datos.";
+        console.error(err);
+      });
+  </script>
+</body>
+</html>
